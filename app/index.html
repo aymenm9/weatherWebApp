@@ -18,36 +18,40 @@
     <main>
         <section id="toDayWeather">
             <div class="card">
-                <div class="searchLocation"><select name="searchLocation" id="searchLocation">
-                        <option value="setif">setif,Alger</option>
-                        <option value="setif">setif,Alger</option>
-                        <option value="setif">setif,Alger</option>
-                    </select><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                <div class="searchLocation">
+                <input list="options" id="search" name="search"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
                         <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6" />
                     </svg>
+                <datalist id="options">
+                  <option value="setif,Alger1">
+                  <option value="setif,Alger2">
+                  <option value="setif,Alger3">
+                  <option value="setif,Alger4">
+                  <option value="setif,Alger5">
+                </datalist>
                 </div>
                 <div class="weather">
-                    <div class="icon">
-                        <img src="imgs/Few clouds.png" alt="" srcset="" class="weatherIcon">
+                    <div class="weatherImg">
+                        <img src="imgs/few_clouds.png" alt="" srcset="" >
                     </div>
                     <div class="weatherInfo">
                         <div class="weatherInfoMain">
                             <h1 id="temperature">26°C</h1>
                             <p id="weatherCondition">Few clouds</p>
-                            <h3 id="location">
-                                </h6>
+                            <h3 id="location">setif,Alger</h3>
+                                
                         </div>
                         <div class="weatherInfobody">
                             <div class="weatherInfobodyContent" id="humidity">
-                                <div class="weatherInfobodyContentIcon"></div>
+                                <div class="weatherInfobodyContentIcon"><img src="/icons/humidity.png" alt="" srcset=""></div>
                                 <div class="weatherInfobodyContentText"><span>75%</span><span>humidity</span></div>
                             </div>
-                            <div class="weatherInfobodyContent" id="Wind Speed">
-                                <div class="weatherInfobodyContentIcon"></div>
+                            <div class="weatherInfobodyContent" id="WindSpeed">
+                                <div class="weatherInfobodyContentIcon"><img src="/icons/WindSpeed.png" alt="" srcset=""></div>
                                 <div class="weatherInfobodyContentText"><span>13Km/h</span><span>Wind Speed</span></div>
                             </div>
-                            <div class="weatherInfobodyContent" id="Temperature Felt"><span>28°C</span><span>Temperature
+                            <div class="weatherInfobodyContent" id="TemperatureFelt"><span>28°C</span><span>Temperature
                                     Felt</span></div>
                             <div class="weatherInfobodyContent" id="Visibility"><span>14
                                     Km</span><span>Visibility</span></div>
@@ -57,40 +61,41 @@
                 <div class="timeTemp">
                     <div class="timeTempCard" id="">
                         <span class="timeTempCardTime">16:00</span>
-                        <span class="timeTempCardIcon"><img src="" alt="" srcset=""></span>
+                        <span class="timeTempCardIcon"><img src="/icons/clear.png" alt="" srcset="" class="icon"></span>
                         <span class="timeTempCardWeatherCondition">sunny</span>
                         <span class="timeTempCardTemperature">15°C</span>
                     </div>
                     <div class="timeTempCard" id="">
                         <span class="timeTempCardTime">16:00</span>
-                        <span class="timeTempCardIcon"><img src="" alt="" srcset=""></span>
+                        <span class="timeTempCardIcon"><img src="/icons/clear.png" alt="" srcset="" class="icon"></span>
                         <span class="timeTempCardWeatherCondition">sunny</span>
                         <span class="timeTempCardTemperature">15°C</span>
                     </div>
                     <div class="timeTempCard" id="">
                         <span class="timeTempCardTime">16:00</span>
-                        <span class="timeTempCardIcon"><img src="" alt="" srcset=""></span>
+                        <span class="timeTempCardIcon"><img src="/icons/clear.png" alt="" srcset="" class="icon"></span>
                         <span class="timeTempCardWeatherCondition">sunny</span>
                         <span class="timeTempCardTemperature">15°C</span>
                     </div>
                     <div class="timeTempCard" id="">
                         <span class="timeTempCardTime">16:00</span>
-                        <span class="timeTempCardIcon"><img src="" alt="" srcset=""></span>
+                        <span class="timeTempCardIcon"><img src="/icons/clear.png" alt="" srcset="" class="icon"></span>
                         <span class="timeTempCardWeatherCondition">sunny</span>
                         <span class="timeTempCardTemperature">15°C</span>
                     </div>
                     <div class="timeTempCard" id="">
                         <span class="timeTempCardTime">16:00</span>
-                        <span class="timeTempCardIcon"><img src="" alt="" srcset=""></span>
+                        <span class="timeTempCardIcon"><img src="/icons/clear.png" alt="" srcset="" class="icon"></span>
                         <span class="timeTempCardWeatherCondition">sunny</span>
                         <span class="timeTempCardTemperature">15°C</span>
                     </div>
                     <div class="timeTempCard" id="">
                         <span class="timeTempCardTime">16:00</span>
-                        <span class="timeTempCardIcon"><img src="" alt="" srcset=""></span>
+                        <span class="timeTempCardIcon"><img src="/icons/clear.png" alt="" srcset="" class="icon"></span>
                         <span class="timeTempCardWeatherCondition">sunny</span>
                         <span class="timeTempCardTemperature">15°C</span>
                     </div>
+
                 </div>
 
             </div>
@@ -99,44 +104,44 @@
             <h2>7-Day Weather Report</h2>
             <div id="weekWeather">
                 <div class="weekWeatherCard" id="">
-                    <span class="weekWeatherCardTime">16:00</span>
-                    <span class="weekWeatherCardIcon"><img src="" alt="" srcset=""></span>
+                    <span class="weekWeatherCardTime">DEC 12</span>
+                    <span class="weekWeatherCardIcon"><img src="/icons/clear.png" alt="" srcset=""></span>
                     <span class="weekWeatherCardWeatherCondition">sunny</span>
                     <span class="weekWeatherCardTemperature">15/5°C</span>
                 </div>
                 <div class="weekWeatherCard" id="">
-                    <span class="weekWeatherCardTime">16:00</span>
-                    <span class="weekWeatherCardIcon"><img src="" alt="" srcset=""></span>
+                    <span class="weekWeatherCardTime">DEC 12</span>
+                    <span class="weekWeatherCardIcon"><img src="/icons/clear.png" alt="" srcset=""></span>
                     <span class="weekWeatherCardWeatherCondition">sunny</span>
                     <span class="weekWeatherCardTemperature">15/5°C</span>
                 </div>
                 <div class="weekWeatherCard" id="">
-                    <span class="weekWeatherCardTime">16:00</span>
-                    <span class="weekWeatherCardIcon"><img src="" alt="" srcset=""></span>
+                    <span class="weekWeatherCardTime">DEC 12</span>
+                    <span class="weekWeatherCardIcon"><img src="/icons/clear.png" alt="" srcset=""></span>
                     <span class="weekWeatherCardWeatherCondition">sunny</span>
                     <span class="weekWeatherCardTemperature">15/5°C</span>
                 </div>
                 <div class="weekWeatherCard" id="">
-                    <span class="weekWeatherCardTime">16:00</span>
-                    <span class="weekWeatherCardIcon"><img src="" alt="" srcset=""></span>
+                    <span class="weekWeatherCardTime">DEC 12</span>
+                    <span class="weekWeatherCardIcon"><img src="/icons/clear.png" alt="" srcset=""></span>
                     <span class="weekWeatherCardWeatherCondition">sunny</span>
                     <span class="weekWeatherCardTemperature">15/5°C</span>
                 </div>
                 <div class="weekWeatherCard" id="">
-                    <span class="weekWeatherCardTime">16:00</span>
-                    <span class="weekWeatherCardIcon"><img src="" alt="" srcset=""></span>
+                    <span class="weekWeatherCardTime">DEC 12</span>
+                    <span class="weekWeatherCardIcon"><img src="/icons/clear.png" alt="" srcset=""></span>
                     <span class="weekWeatherCardWeatherCondition">sunny</span>
                     <span class="weekWeatherCardTemperature">15/5°C</span>
                 </div>
                 <div class="weekWeatherCard" id="">
-                    <span class="weekWeatherCardTime">16:00</span>
-                    <span class="weekWeatherCardIcon"><img src="" alt="" srcset=""></span>
+                    <span class="weekWeatherCardTime">DEC 12</span>
+                    <span class="weekWeatherCardIcon"><img src="/icons/clear.png" alt="" srcset=""></span>
                     <span class="weekWeatherCardWeatherCondition">sunny</span>
                     <span class="weekWeatherCardTemperature">15/5°C</span>
                 </div>
                 <div class="weekWeatherCard" id="">
-                    <span class="weekWeatherCardTime">16:00</span>
-                    <span class="weekWeatherCardIcon"><img src="" alt="" srcset=""></span>
+                    <span class="weekWeatherCardTime">DEC 12</span>
+                    <span class="weekWeatherCardIcon"><img src="/icons/clear.png" alt="" srcset=""></span>
                     <span class="weekWeatherCardWeatherCondition">sunny</span>
                     <span class="weekWeatherCardTemperature">15/5°C</span>
                 </div>

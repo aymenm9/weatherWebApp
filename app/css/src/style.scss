@@ -1,36 +1,44 @@
 $primary-color : #454749;
 $secondary-color : #555759;
-$white : #f0f0f0;
+$white :#ffffff;
 $black : #0d0d0d;
 body{
-    margin: 5rem;
+    margin:0;
     font-family: 'roboto',sans-serif;
+    @media (min-width: 768px) {
+        margin: 3rem 7rem;
+    }
 }
 
 .card{
     background: linear-gradient(to left,$primary-color,$secondary-color);
-    padding: 2rem;
-    border-radius: 2.5rem;
+    padding: 3rem;
+    border-radius: 0;
     color: $white;
+    @media (min-width: 768px) {
+        border-radius: 2.5rem;
+    }
 }
 .weather,.timeTemp{
     display: flex;
-    flex-direction: row;
 }
 .weather{
+    flex-direction: column;
     margin: 2rem 0;
     justify-content: space-evenly;
     >*{
         flex: 1;
     }
-    img{
-        width: 100%;
+    .weatherImg img{
+        width: 60%;
     }
-    @media screen and (max-width: 768px) {
-        flex-direction: column;
-        img{
-            width: 100%;
-        }
+    .weatherImg{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    @media (min-width: 768px) {
+        flex-direction: row;
     }
     .weatherInfo{
         display: flex;
@@ -38,34 +46,105 @@ body{
         justify-content: center;
         align-items: center;
         h1,h2,h3,h4,h5,h6,p{
-            margin: 0;
+            margin: 0.25rem 0 0 0;
         }
         h1{
             font-size: 5rem;
             
         }
+        .weatherInfoMain{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 2rem;
+            
+        }
         .weatherInfobody{
             display: grid;
             grid-template-columns:repeat(2, 1fr);
+            gap: 1rem 3rem;
+            margin-bottom: 3rem;
+            align-items: center;
+            justify-content: center;
             .weatherInfobodyContent{
                 display: flex;
                 flex-direction: column;     
             }
-            .weatherInfobodyContent:nth-of-type(1),.weatherInfobodyContent:nth-of-type(1){
+            .weatherInfobodyContent:nth-of-type(1),.weatherInfobodyContent:nth-of-type(2){
                 flex-direction: row;
             }
             .weatherInfobodyContentText{
                 display: flex;
                 flex-direction: column;
             }
+            .weatherInfobodyContentIcon img{
+                height: 2.5rem;
+                margin-right: 0.5rem;
+            }
         }
     }
 }
 .timeTemp{
+    margin-top: 3rem;
+    flex-direction: row;
     justify-content: space-around;
 }
 .timeTempCard{
     display: flex;
     flex-direction: column;
+    align-items: center;
     margin: 0 2rem ;
+}
+
+.icon{
+    height: 2rem;
+}
+.searchLocation{
+    svg{
+        color: $primary-color;
+    }
+    input{
+        width: 100%;
+        height: 90%;
+        border: 0;
+    }
+    justify-self: center;
+    width: 80%;
+    padding: 0.5rem 1rem;
+    background-color: $white;
+    display: flex;
+    justify-content: center;
+    border-radius: 2rem;
+    margin-bottom: 4rem;
+    @media (min-width: 768px) {
+        width: 40%;
+        margin-bottom: 2rem;
+    }
+}
+#weekReport{
+    margin-top: 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    h2{
+        font-size: 2rem;
+    }
+
+}
+.weekWeatherCard{
+    display: flex;
+    padding: 0.25rem 5rem;
+    justify-content: space-between;
+    span{
+        font-weight: 500;
+        font-size: 1.5rem;
+        margin: 0 2rem;
+    }
+    .weekWeatherCardIcon img{
+        background-color: $primary-color;
+        height: 1.5rem;
+        padding: 0.25rem;
+        border-radius: 1rem ;
+    }
 }
