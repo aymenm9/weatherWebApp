@@ -29,10 +29,10 @@ body{
     >*{
         flex: 1;
     }
-    .weatherImg img{
+    #weatherImg img{
         width: 60%;
     }
-    .weatherImg{
+    #weatherImg{
         display: flex;
         justify-content: center;
         align-items: center;

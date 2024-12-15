@@ -23,9 +23,9 @@ body {
   justify-content: space-evenly; }
   .weather > * {
     flex: 1; }
-  .weather .weatherImg img {
+  .weather #weatherImg img {
     width: 60%; }
-  .weather .weatherImg {
+  .weather #weatherImg {
     display: flex;
     justify-content: center;
     align-items: center; }
