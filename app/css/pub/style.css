@@ -78,7 +78,8 @@ body {
   margin: 0 2rem; }
 
 .icon {
-  height: 2rem; }
+  height: 2rem;
+  margin: 0.5rem 0; }
 
 .searchLocation {
   justify-self: center;
