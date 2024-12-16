@@ -112,7 +112,8 @@ body {
 .weekWeatherCard {
   display: flex;
   padding: 0.25rem 5rem;
-  justify-content: space-between; }
+  justify-content: space-between;
+  opacity: 30%; }
   .weekWeatherCard span {
     font-weight: 500;
     font-size: 1.5rem;

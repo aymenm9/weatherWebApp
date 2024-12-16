@@ -1,3 +1,5 @@
+const apiKey = `381347a7b6d741da47df9aa67b753a09`;
+
 
 const search = document.getElementById('search');
 const options = document.getElementById('options');
@@ -16,8 +18,36 @@ const visibility = document.getElementById('visibilityVal');
 
 const timeTempCards = document.querySelectorAll('.timeTempCard');
 
-fetchMainWeatherData();
-fetchTodayWeatherData();
+init()
+
+search.addEventListener("keyup", (Event)=>{
+    const pl = search.value?search.value:" "
+    if (Event.key == 'Enter'){
+        const loc = `q=${pl}` 
+        fetchMainWeatherData(loc)
+        fetchTodayWeatherData(loc)
+    }
+    const api =  `http://api.openweathermap.org/geo/1.0/direct?q=${pl}&limit=5&appid=${apiKey}`
+    fetch(api).then(response => {
+        if (!response.ok) {
+            throw new Error("Failed to fetch weather data.");
+        }
+        return response.json();
+    }).then(data =>{
+        options.innerHTML = "";
+        data.forEach(place => {
+            const opt = createOption(place.name, place.country)
+            options.appendChild(opt)
+        });
+    }).catch(e=> console.log(e))
+})
+
+function createOption(val,country) {
+    const opt = document.createElement('option')
+    opt.value = val
+    opt.innerText = `${val}, ${country}`
+    return opt
+}
 function get_location() {
     if (!navigator.geolocation) {
         throw new Error("This browser doesn't support geolocation");
@@ -33,13 +63,23 @@ function get_location() {
         )
     })
 }
-
-async function fetchMainWeatherData() {
+async function init() {
     try {
         let location = await get_location();
+        const loc = `lat=${location.latitude}&lon=${location.longitude}` 
+        fetchMainWeatherData(loc)
+        fetchTodayWeatherData(loc)
         
-        const apiKey = `381347a7b6d741da47df9aa67b753a09`;
-        const api = `https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&exclude=minutely,daily,alerts&units=metric&appid=${apiKey}`;
+    } catch (error) {
+        console.error(error);
+    }
+    
+}
+async function fetchMainWeatherData(location) {
+    try {
+        //let location = await get_location();
+    
+        const api = `https://api.openweathermap.org/data/2.5/weather?${location}&exclude=minutely,daily,alerts&units=metric&appid=${apiKey}`;
         fetch(api).then(response => {
         if (!response.ok) {
             throw new Error("Failed to fetch weather data.");
@@ -52,7 +92,7 @@ async function fetchMainWeatherData() {
         humidity.innerHTML = data.main.humidity;
         WindSpeed.innerHTML = Math.floor(data.wind.speed);
         TemperatureFelt.innerHTML = Math.floor(data.main.feels_like);
-        visibility.innerHTML = data.visibility;
+        visibility.innerHTML = data.visibility/1000;
         let n = data.weather[0].icon
         n = n[n.length-1] == 'n' && data.weather[0].main =='Clear'? '_n' : '';
         weatherImg.src = `/imgs/${data.weather[0].main}${n}.png`
@@ -61,19 +101,16 @@ async function fetchMainWeatherData() {
         console.error(error);
 }}
 
-async function fetchTodayWeatherData() {
+async function fetchTodayWeatherData(location) {
     try {
-        let location = await get_location();
-        
-        const apiKey = `381347a7b6d741da47df9aa67b753a09`;
-        const api = `https://api.openweathermap.org/data/2.5/forecast?lat=${location.latitude}&lon=${location.longitude}&cnt=6&units=metric&appid=${apiKey}`;
+        //let location = await get_location();
+        const api = `https://api.openweathermap.org/data/2.5/forecast?${location}&cnt=6&units=metric&appid=${apiKey}`;
         fetch(api).then(response => {
         if (!response.ok) {
             throw new Error("Failed to fetch weather data.");
         }
         return response.json();
     }).then(data=>{
-        console.log(data);
         for (let i = 0; i < timeTempCards.length; i++) {
             const element = timeTempCards[i];
             cdata = data.list[i]
@@ -88,3 +125,21 @@ async function fetchTodayWeatherData() {
     } catch (error) {
         console.error(error);
 }}
+
+/*async function fetchWeekWeatherData() {
+    try {
+        let location = await get_location();
+        const api = `https://api.openweathermap.org/data/2.5/onecall?lat=${location.latitude}&lon=${location.longitude}&exclude=hourly,minutely,alerts&units=metric&appid=${apiKey}`;
+                             
+        
+        fetch(api).then(response => {
+        if (!response.ok) {
+            throw new Error("Failed to fetch weather data.");
+        }
+        return response.json();
+    }).then(data=>{
+        console.log(data);
+    })
+    } catch (error) {
+        console.error(error);
+}}*/
