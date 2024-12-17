@@ -18,6 +18,8 @@ const visibility = document.getElementById('visibilityVal');
 
 const timeTempCards = document.querySelectorAll('.timeTempCard');
 
+const ctx = document.getElementById('circleChart').getContext('2d');
+let circleChart;
 init()
 
 search.addEventListener("keyup", (Event)=>{
@@ -111,9 +113,11 @@ async function fetchTodayWeatherData(location) {
         }
         return response.json();
     }).then(data=>{
+        let chart_data = [];
         for (let i = 0; i < timeTempCards.length; i++) {
             const element = timeTempCards[i];
             cdata = data.list[i]
+            chart_data.push(cdata.weather[0].main)
             element.children[0].innerText = `${new Date(cdata.dt * 1000).getHours()}:00`
             let n = cdata.weather[0].icon
             n = n[n.length-1] == 'n' && cdata.weather[0].main =='Clear'? '_n' : '';
@@ -121,6 +125,7 @@ async function fetchTodayWeatherData(location) {
             element.children[2].innerHTML = cdata.weather[0].main
             element.children[3].children[0].innerHTML = Math.floor(cdata.main.temp)
         }
+        draw_chart(ctx,chart_data)
     })
     } catch (error) {
         console.error(error);
@@ -143,3 +148,54 @@ async function fetchTodayWeatherData(location) {
     } catch (error) {
         console.error(error);
 }}*/
+
+
+function draw_chart(canvas,chart_data) {
+    if(circleChart){
+        circleChart.destroy();
+    }
+    const colors = [
+        'rgba(255, 223, 86, 0.8)',
+        'rgba(135, 206, 235, 0.8)',
+        'rgba(173, 216, 230, 0.8)',
+        'rgba(54, 162, 235, 0.8)',
+        'rgba(128, 0, 128, 0.8)',
+        'rgba(255, 250, 250, 0.8)',
+        'rgba(255, 69, 0, 0.8)',
+        'rgba(192, 192, 192, 0.8)' 
+    ];
+    let backgroundColor = [];
+    let data = [];
+    let labels = [];
+    chart_data.forEach(WeatherCondition => {
+        let i = labels.indexOf(WeatherCondition);
+        if(i === -1){
+            backgroundColor.push(colors[labels.length])
+            labels.push(WeatherCondition)
+            data.push(4)
+        }else{
+            data[i] += 4;
+        }
+    })
+    console.log(labels,data,backgroundColor);
+    circleChart = new Chart(canvas, {
+        type: 'doughnut',
+        data: {
+            labels: labels,
+            datasets: [{
+                data: data,
+                backgroundColor: backgroundColor,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                }
+            }
+        }
+    });
+
+}

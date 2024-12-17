@@ -124,4 +124,10 @@ body {
     padding: 0.25rem;
     border-radius: 1rem; }
 
+#charts {
+  display: flex;
+  justify-items: center;
+  height: 25rem;
+  width: 25rem; }
+
 /*# sourceMappingURL=style.css.map */
