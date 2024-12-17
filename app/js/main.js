@@ -155,14 +155,14 @@ function draw_chart(canvas,chart_data) {
         circleChart.destroy();
     }
     const colors = [
-        'rgba(255, 223, 86, 0.8)',
-        'rgba(135, 206, 235, 0.8)',
+        'rgba(255, 86, 86, 0.8)',
+        'rgba(0, 183, 255, 0.8)',
         'rgba(173, 216, 230, 0.8)',
         'rgba(54, 162, 235, 0.8)',
         'rgba(128, 0, 128, 0.8)',
         'rgba(255, 250, 250, 0.8)',
         'rgba(255, 69, 0, 0.8)',
-        'rgba(192, 192, 192, 0.8)' 
+        'rgba(251, 255, 0, 0.95)' 
     ];
     let backgroundColor = [];
     let data = [];
