@@ -28,7 +28,9 @@ search.addEventListener("keyup", (Event)=>{
         const loc = `q=${pl}` 
         fetchMainWeatherData(loc)
         fetchTodayWeatherData(loc)
-    }
+    }else{
+
+    
     const api =  `http://api.openweathermap.org/geo/1.0/direct?q=${pl}&limit=5&appid=${apiKey}`
     fetch(api).then(response => {
         if (!response.ok) {
@@ -42,7 +44,7 @@ search.addEventListener("keyup", (Event)=>{
             options.appendChild(opt)
         });
     }).catch(e=> console.log(e))
-})
+}})
 
 function createOption(val,country) {
     const opt = document.createElement('option')
@@ -78,11 +80,11 @@ async function init() {
     
 }
 async function fetchMainWeatherData(location) {
-    try {
         //let location = await get_location();
+        // const api = `https://api.openweathermap.org/data/2.5/weather?q=setif&exclude=minutely,daily,alerts&units=metric&appid=${apiKey}`;
     
-        const api = `https://api.openweathermap.org/data/2.5/weather?${location}&exclude=minutely,daily,alerts&units=metric&appid=${apiKey}`;
-        fetch(api).then(response => {
+    const api = `https://api.openweathermap.org/data/2.5/weather?${location}&exclude=minutely,daily,alerts&units=metric&appid=${apiKey}`;
+    fetch(api).then(response => {
         if (!response.ok) {
             throw new Error("Failed to fetch weather data.");
         }
@@ -98,13 +100,12 @@ async function fetchMainWeatherData(location) {
         let n = data.weather[0].icon
         n = n[n.length-1] == 'n' && data.weather[0].main =='Clear'? '_n' : '';
         weatherImg.src = `/imgs/${data.weather[0].main}${n}.png`
-    })
-    } catch (error) {
-        console.error(error);
-}}
+    }).catch (error =>console.error(error)) 
+    
+}
 
 async function fetchTodayWeatherData(location) {
-    try {
+    
         //let location = await get_location();
         const api = `https://api.openweathermap.org/data/2.5/forecast?${location}&cnt=6&units=metric&appid=${apiKey}`;
         fetch(api).then(response => {
@@ -115,6 +116,7 @@ async function fetchTodayWeatherData(location) {
     }).then(data=>{
         let chart_data = [];
         for (let i = 0; i < timeTempCards.length; i++) {
+
             const element = timeTempCards[i];
             cdata = data.list[i]
             chart_data.push(cdata.weather[0].main)
@@ -126,10 +128,8 @@ async function fetchTodayWeatherData(location) {
             element.children[3].children[0].innerHTML = Math.floor(cdata.main.temp)
         }
         draw_chart(ctx,chart_data)
-    })
-    } catch (error) {
-        console.error(error);
-}}
+    }).catch (error =>console.error(error)) 
+}
 
 /*async function fetchWeekWeatherData() {
     try {
@@ -177,7 +177,6 @@ function draw_chart(canvas,chart_data) {
             data[i] += 4;
         }
     })
-    console.log(labels,data,backgroundColor);
     circleChart = new Chart(canvas, {
         type: 'doughnut',
         data: {
