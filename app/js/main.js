@@ -1,5 +1,24 @@
 const apiKey = `381347a7b6d741da47df9aa67b753a09`;
-
+const icons  = {
+    '01d' : '01d.png',
+    '01n' : '01n.png',
+    '02d' : '02d.png',
+    '02n' : '02n.png',
+    '03d' : '03.png',
+    '03n' : '03.png',
+    '04d' : '04.png',
+    '04n' : '04.png',
+    '09d' : '09.png',
+    '09n' : '09.png',
+    '10d' : '10d.png',
+    '10n' : '10n.png',
+    '11d' : '11.png',
+    '11n' : '11.png',
+    '13d' : '13.png',
+    '13n' : '13.png',
+    '50d' : '50.png',
+    '50n' : '50.png',
+}
 
 const search = document.getElementById('search');
 const options = document.getElementById('options');
@@ -8,6 +27,7 @@ const weatherImg = document.querySelector('#weatherImg img');
 
 const currentTemperature = document.getElementById('temperatureVal');
 const currentWeatherCondition = document.getElementById('weatherCondition');
+const currentweatherConditionDescription = document.getElementById('weatherConditionDescription');
 const currentLocation = document.getElementById('location');
 
 const humidity = document.getElementById('humidityVal');
@@ -92,14 +112,13 @@ async function fetchMainWeatherData(location) {
     }).then(data=>{
         currentTemperature.innerText = Math.floor(data.main.temp);
         currentWeatherCondition.innerText = data.weather[0].main;
+        currentweatherConditionDescription.innerText = data.weather[0].description;
         currentLocation.innerText = `${data.name}, ${data.sys.country}`;
         humidity.innerHTML = data.main.humidity;
         WindSpeed.innerHTML = Math.floor(data.wind.speed);
         TemperatureFelt.innerHTML = Math.floor(data.main.feels_like);
         visibility.innerHTML = data.visibility/1000;
-        let n = data.weather[0].icon
-        n = n[n.length-1] == 'n' && data.weather[0].main =='Clear'? '_n' : '';
-        weatherImg.src = `/imgs/${data.weather[0].main}${n}.png`
+        weatherImg.src = `/imgs/${icons[data.weather[0].icon]}`
     }).catch (error =>console.error(error)) 
     
 }
@@ -119,11 +138,9 @@ async function fetchTodayWeatherData(location) {
 
             const element = timeTempCards[i];
             cdata = data.list[i]
-            chart_data.push(cdata.weather[0].main)
+            chart_data.push(cdata.weather[0].description)
             element.children[0].innerText = `${new Date(cdata.dt * 1000).getHours()}:00`
-            let n = cdata.weather[0].icon
-            n = n[n.length-1] == 'n' && cdata.weather[0].main =='Clear'? '_n' : '';
-            element.children[1].children[0].src = `/icons/${cdata.weather[0].main}${n}.png`
+            element.children[1].children[0].src = `/icons/${icons[cdata.weather[0].icon]}`
             element.children[2].innerHTML = cdata.weather[0].main
             element.children[3].children[0].innerHTML = Math.floor(cdata.main.temp)
         }
@@ -149,28 +166,22 @@ async function fetchTodayWeatherData(location) {
         console.error(error);
 }}*/
 
+function genRandColor() {
+    return `#${Math.floor(Math.random() * 16777215).toString(16)}`
+
+}
 
 function draw_chart(canvas,chart_data) {
     if(circleChart){
         circleChart.destroy();
     }
-    const colors = [
-        'rgba(255, 86, 86, 0.8)',
-        'rgba(0, 183, 255, 0.8)',
-        'rgba(173, 216, 230, 0.8)',
-        'rgba(54, 162, 235, 0.8)',
-        'rgba(128, 0, 128, 0.8)',
-        'rgba(255, 250, 250, 0.8)',
-        'rgba(255, 69, 0, 0.8)',
-        'rgba(251, 255, 0, 0.95)' 
-    ];
     let backgroundColor = [];
     let data = [];
     let labels = [];
     chart_data.forEach(WeatherCondition => {
         let i = labels.indexOf(WeatherCondition);
         if(i === -1){
-            backgroundColor.push(colors[labels.length])
+            backgroundColor.push(genRandColor())
             labels.push(WeatherCondition)
             data.push(4)
         }else{
@@ -198,3 +209,5 @@ function draw_chart(canvas,chart_data) {
     });
 
 }
+
+

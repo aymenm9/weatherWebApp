@@ -29,6 +29,11 @@ body {
     display: flex;
     justify-content: center;
     align-items: center; }
+  .weather #weatherCondition {
+    font-size: 1rem; }
+  .weather #weatherConditionDescription {
+    font-size: 0.75rem;
+    color: #cecece; }
   @media (min-width: 768px) {
     .weather {
       flex-direction: row; } }

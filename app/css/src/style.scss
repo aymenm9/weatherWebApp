@@ -1,6 +1,7 @@
 $primary-color : #454749;
 $secondary-color : #555759;
 $white :#ffffff;
+$secondary-white : #cecece;
 $black : #0d0d0d;
 body{
     margin:0;
@@ -36,6 +37,13 @@ body{
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+    #weatherCondition{
+        font-size: 1rem;
+    }
+    #weatherConditionDescription{
+        font-size: 0.75rem;
+        color: $secondary-white;
     }
     @media (min-width: 768px) {
         flex-direction: row;
