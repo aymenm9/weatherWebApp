@@ -100,8 +100,6 @@ async function init() {
     
 }
 async function fetchMainWeatherData(location) {
-        //let location = await get_location();
-        // const api = `https://api.openweathermap.org/data/2.5/weather?q=setif&exclude=minutely,daily,alerts&units=metric&appid=${apiKey}`;
     
     const api = `https://api.openweathermap.org/data/2.5/weather?${location}&exclude=minutely,daily,alerts&units=metric&appid=${apiKey}`;
     fetch(api).then(response => {
@@ -125,7 +123,6 @@ async function fetchMainWeatherData(location) {
 
 async function fetchTodayWeatherData(location) {
     
-        //let location = await get_location();
         const api = `https://api.openweathermap.org/data/2.5/forecast?${location}&cnt=6&units=metric&appid=${apiKey}`;
         fetch(api).then(response => {
         if (!response.ok) {
@@ -133,21 +130,20 @@ async function fetchTodayWeatherData(location) {
         }
         return response.json();
     }).then(data=>{
-        let chart_data = [];
-        for (let i = 0; i < timeTempCards.length; i++) {
-
-            const element = timeTempCards[i];
-            cdata = data.list[i]
-            chart_data.push(cdata.weather[0].description)
-            element.children[0].innerText = `${new Date(cdata.dt * 1000).getHours()}:00`
-            element.children[1].children[0].src = `/icons/${icons[cdata.weather[0].icon]}`
-            element.children[2].innerHTML = cdata.weather[0].main
-            element.children[3].children[0].innerHTML = Math.floor(cdata.main.temp)
-        }
-        draw_chart(ctx,chart_data)
+        TodayWeatherData(data)
+        draw_chart(ctx,data.list.map(item => item.weather[0].description))
     }).catch (error =>console.error(error)) 
 }
-
+async function TodayWeatherData(data) {
+    for (let i = 0; i < timeTempCards.length; i++) {
+        const element = timeTempCards[i];
+        cdata = data.list[i]
+        element.children[0].innerText = `${new Date(cdata.dt * 1000).getHours()}:00`
+        element.children[1].children[0].src = `/icons/${icons[cdata.weather[0].icon]}`
+        element.children[2].innerHTML = cdata.weather[0].main
+        element.children[3].children[0].innerHTML = Math.floor(cdata.main.temp)
+    }
+}
 /*async function fetchWeekWeatherData() {
     try {
         let location = await get_location();
@@ -171,7 +167,7 @@ function genRandColor() {
 
 }
 
-function draw_chart(canvas,chart_data) {
+async function draw_chart(canvas,chart_data) {
     if(circleChart){
         circleChart.destroy();
     }
